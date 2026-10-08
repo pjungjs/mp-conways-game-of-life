@@ -1,6 +1,7 @@
 {
   "name": "game-of-life",
   "private": true,
+  "license": "MIT",
   "description": "Conway's Game of Life: Python logic running in the browser, Tailwind CSS styling",
   "scripts": {
     "build:css": "tailwindcss -i css/input.css -o css/styles.css",
