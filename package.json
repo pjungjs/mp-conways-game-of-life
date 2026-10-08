@@ -1,0 +1,15 @@
+{
+  "name": "game-of-life",
+  "private": true,
+  "description": "Conway's Game of Life: Python logic running in the browser, Tailwind CSS styling",
+  "scripts": {
+    "build:css": "tailwindcss -i css/input.css -o css/styles.css",
+    "watch:css": "tailwindcss -i css/input.css -o css/styles.css --watch",
+    "serve": "python3 -m http.server 8000",
+    "test": "python3 -B -m unittest -v"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "^4.3.3",
+    "tailwindcss": "^4.3.3"
+  }
+}

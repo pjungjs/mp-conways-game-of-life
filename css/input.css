@@ -1,0 +1,62 @@
+@import "tailwindcss";
+
+/* One place for every color. `static` keeps them all available as CSS variables,
+   which js/main.js reads to paint the canvas. */
+@theme static {
+  --color-page: #1b2130;
+  --color-panel: #272e43;
+  --color-edge: #3a4360;
+  --color-field: #161b28;
+  --color-ink: #e8ebf4;
+  --color-muted: #9aa3bd;
+  --color-accent: #5eead4;
+  --color-go: #4ade80;
+  --color-stop: #ff6b6b;
+  --color-danger: #ff8a8a;
+
+  /* the board */
+  --color-cell-dead: #07090d;
+  --color-cell-live: #ffffff;
+  --color-cell-born: #facc15;   /* became alive this generation */
+  --color-cell-died: #be3455;   /* died this generation */
+  --color-cell-grid: #40496a;
+}
+
+@layer base {
+  body {
+    @apply bg-page text-ink font-sans min-h-screen;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply cursor-pointer rounded-md border border-edge bg-[#323a54] px-3 py-2 text-ink transition-colors hover:border-accent;
+  }
+  .field {
+    @apply w-full rounded-md border border-edge bg-field px-2.5 py-2 text-ink placeholder:text-muted/60;
+  }
+  .field.invalid {
+    @apply border-danger;
+  }
+  .panel {
+    @apply rounded-xl border border-edge bg-panel;
+  }
+  .nav-link {
+    @apply rounded-md px-3 py-1.5 text-sm text-muted transition-colors hover:text-ink aria-[current=page]:bg-panel aria-[current=page]:text-ink;
+  }
+  .article h2 {
+    @apply mt-10 mb-3 text-xl font-semibold text-ink;
+  }
+  .article p {
+    @apply mb-3 leading-relaxed text-muted;
+  }
+  .article strong {
+    @apply font-semibold text-ink;
+  }
+  .article code {
+    @apply rounded bg-field px-1.5 py-0.5 font-mono text-[0.85em] text-accent;
+  }
+  .article ul {
+    @apply mb-3 list-disc space-y-1 pl-6 text-muted;
+  }
+}
