@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How it works | Game of Life</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="mx-auto flex w-full max-w-5xl items-center justify-between px-4 py-4">
+    <a href="index.html" class="font-semibold tracking-wide">Conway's Game of Life</a>
+    <nav class="flex gap-1">
+      <a class="nav-link" href="index.html">Game</a>
+      <a class="nav-link" href="how-it-works.html" aria-current="page">How it works</a>
+      <a class="nav-link" href="about.html">About</a>
+    </nav>
+  </header>
+
+  <main class="article mx-auto w-full max-w-3xl px-4 pb-16">
+    <h1 class="mt-4 text-3xl font-semibold">How it works</h1>
+    <p class="mt-3">Draw a starting pattern and press Start: every cell follows the same few rules, generation after generation.</p>
+
+    <h2 id="rules">Rules (B3/S23)</h2>
+    <ol class="mb-3 list-decimal space-y-1.5 pl-6 text-muted">
+      <li>Any live cell with fewer than two live neighbours dies (underpopulation).</li>
+      <li>Any live cell with two or three live neighbours lives on to the next generation.</li>
+      <li>Any live cell with more than three live neighbours dies (overpopulation).</li>
+      <li>Any dead cell with exactly three live neighbours becomes a live cell (reproduction).</li>
+    </ol>
+    <div class="my-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
+      <figure class="panel flex flex-col items-center gap-3 p-4 text-center">
+        <div class="grid w-24 grid-cols-3"><span class="aspect-square bg-cell-live border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-live border border-cell-grid ring-2 ring-inset ring-accent"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span></div>
+        <figcaption class="flex flex-col gap-1.5 text-sm">
+          <strong class="text-ink">1. Underpopulation</strong>
+          <span class="text-muted">Alive with 1 live neighbor: fewer than two.</span>
+          <span class="flex items-center justify-center gap-2 text-ink"><span class="size-3.5 rounded-sm bg-cell-dead border border-cell-grid"></span>Next generation: dies</span>
+        </figcaption>
+      </figure>
+      <figure class="panel flex flex-col items-center gap-3 p-4 text-center">
+        <div class="grid w-24 grid-cols-3"><span class="aspect-square bg-cell-live border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-live border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-live border border-cell-grid ring-2 ring-inset ring-accent"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span></div>
+        <figcaption class="flex flex-col gap-1.5 text-sm">
+          <strong class="text-ink">2. Survival</strong>
+          <span class="text-muted">Alive with 2 live neighbors: lives on.</span>
+          <span class="flex items-center justify-center gap-2 text-ink"><span class="size-3.5 rounded-sm bg-cell-live"></span>Next generation: stays alive</span>
+        </figcaption>
+      </figure>
+      <figure class="panel flex flex-col items-center gap-3 p-4 text-center">
+        <div class="grid w-24 grid-cols-3"><span class="aspect-square bg-cell-live border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-live border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-live border border-cell-grid ring-2 ring-inset ring-accent"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-live border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-live border border-cell-grid"></span></div>
+        <figcaption class="flex flex-col gap-1.5 text-sm">
+          <strong class="text-ink">3. Overpopulation</strong>
+          <span class="text-muted">Alive with 4 live neighbors: more than three.</span>
+          <span class="flex items-center justify-center gap-2 text-ink"><span class="size-3.5 rounded-sm bg-cell-dead border border-cell-grid"></span>Next generation: dies</span>
+        </figcaption>
+      </figure>
+      <figure class="panel flex flex-col items-center gap-3 p-4 text-center">
+        <div class="grid w-24 grid-cols-3"><span class="aspect-square bg-cell-live border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-live border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid ring-2 ring-inset ring-accent"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-live border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span></div>
+        <figcaption class="flex flex-col gap-1.5 text-sm">
+          <strong class="text-ink">4. Reproduction</strong>
+          <span class="text-muted">Dead with exactly 3 live neighbors.</span>
+          <span class="flex items-center justify-center gap-2 text-ink"><span class="size-3.5 rounded-sm bg-cell-live"></span>Next generation: becomes alive</span>
+        </figcaption>
+      </figure>
+    </div>
+    <p>Neighbors are the up to eight cells touching a cell, diagonals included; cells outside the grid count as dead. In short, <strong>B3/S23</strong> is <strong>B</strong>irth on 3 neighbors and <strong>S</strong>urvival on 2 or 3. A live cell that doesn't survive dies.</p>
+
+    <h2 id="rules-input">Changing the rule</h2>
+    <p>The <strong>Rule</strong> box takes the rule in B/S notation: <strong>B</strong> (birth), a slash, then <strong>S</strong> (survival), each followed by neighbor counts. The default is <code>B3/S23</code>.</p>
+    <ul>
+      <li><strong>B</strong> lists the neighbor counts that bring a dead cell to life. <strong>S</strong> lists the counts that keep a live cell alive; with any other count it dies. A change applies from the next generation.</li>
+      <li>Counts are the digits <code>0</code>–<code>8</code>, written together: <code>S23</code> means 2 <em>or</em> 3 neighbors. Each digit is its own count, so <code>S12</code> is 1 or 2, never twelve. Their order doesn't matter, and B and S can be lower case.</li>
+      <li>An empty list means never: <code>B2/S</code> has no survivors, and <code>B/S23</code> has no births.</li>
+      <li>The format is checked as you type: B first, then one slash, then S, and only the digits 0–8. If it doesn't fit, a message says what to fix and the previous rule keeps running.</li>
+    </ul>
+    <div class="panel my-4 overflow-x-auto">
+      <table class="w-full text-left text-sm">
+        <thead class="text-xs uppercase tracking-widest text-muted"><tr><th class="px-4 py-2">Try (click to open in the game)</th><th class="px-4 py-2">Rule</th><th class="px-4 py-2">What to expect</th></tr></thead>
+        <tbody class="[&_td]:px-4 [&_td]:py-2 [&_tr]:border-t [&_tr]:border-edge [&_td:last-child]:text-muted">
+          <tr class="relative cursor-pointer hover:bg-field"><td class="whitespace-nowrap"><a href="index.html?rule=B3/S23" class="after:absolute after:inset-0 hover:underline">Conway's Life <span class="text-muted">(default)</span></a></td><td><code>B3/S23</code></td><td>Gliders, blinkers and other small patterns emerge from the chaos.</td></tr>
+          <tr class="relative cursor-pointer hover:bg-field"><td class="whitespace-nowrap"><a href="index.html?rule=B36/S23" class="after:absolute after:inset-0 hover:underline">HighLife</a></td><td><code>B36/S23</code></td><td>Much like Life, plus a small pattern that copies itself, the replicator.</td></tr>
+          <tr class="relative cursor-pointer hover:bg-field"><td class="whitespace-nowrap"><a href="index.html?rule=B2/S" class="after:absolute after:inset-0 hover:underline">Seeds</a></td><td><code>B2/S</code></td><td>Every live cell dies each generation, so patterns burst outward.</td></tr>
+          <tr class="relative cursor-pointer hover:bg-field"><td class="whitespace-nowrap"><a href="index.html?rule=B345/S5" class="after:absolute after:inset-0 hover:underline">Long Life</a></td><td><code>B345/S5</code></td><td>Long-lived oscillating patterns that stay inside a diamond-shaped area.</td></tr>
+          <tr class="relative cursor-pointer hover:bg-field"><td class="whitespace-nowrap"><a href="index.html?rule=B35/S234578" class="after:absolute after:inset-0 hover:underline">Land Rush</a></td><td><code>B35/S234578</code></td><td>Chaotic growth that settles into a patchwork of plowed-field regions.</td></tr>
+        </tbody>
+      </table>
+    </div>
+
+    <h2>Using the board</h2>
+    <ul>
+      <li><strong>Draw:</strong> click or drag to bring cells to life or erase them, before or during a run. <strong>Reset</strong> returns to the grid you started from, <strong>Randomize</strong> fills a new one and <strong>Clear</strong> empties it.</li>
+      <li><strong>Colors:</strong> alive is white and dead is black. Under <strong>Style</strong>, <em>Highlight Just Born / Just Died cells</em> (on by default) colors the cells that changed in the latest generation, in colors you can pick. <em>Roundness</em> rounds the cells' corners, from square (off) to round, and <em>Speed</em> sets generations per second.</li>
+      <li><strong>Size:</strong> the grid is square, 3 × 3 to 300 × 300 (100 × 100 to start). The grid changes as you type the size and each new size starts a new random grid. Large grids take longer per generation, so the speed may not be reached, and above 200 × 200 the grid lines are hidden.</li>
+      <li><strong>It stops</strong> when you press Stop, at the generation limit (250 to start, 1 to 1000), when all cells die, or when the grid is stable (a generation changes nothing). Repeating patterns such as the blinker keep running. Drawing a cell or changing the rules lets a stopped game run again.</li>
+    </ul>
+
+    <h2>Under the hood: how a generation is computed</h2>
+    <p>All of the game's logic runs as Python inside your browser; the page only draws the grid and passes your input to it.</p>
+    <p>Every cell must be judged by the <em>current</em> generation, so changing one right away would corrupt its neighbors' counts. Instead of copying the grid, the game keeps one grid and gives each cell one of four states:</p>
+    <ul>
+      <li><code>DEAD_CELL</code> and <code>LIVE_CELL</code>: plain dead and alive.</li>
+      <li><code>WILL_BE_ALIVE</code>: dead now, will be born. Counts as dead.</li>
+      <li><code>WILL_BE_DEAD</code>: alive now, will die. Counts as alive.</li>
+    </ul>
+    <p>A generation is two passes. <strong>Mark:</strong> count each cell's live neighbors and mark the cells that will change, so earlier decisions never change later counts. <strong>Settle:</strong> turn <code>WILL_BE_ALIVE</code> into <code>LIVE_CELL</code> and <code>WILL_BE_DEAD</code> into <code>DEAD_CELL</code>. The "will be" states only exist during the step, and the highlight and the rounded corners are drawn by the page, which finds the changed cells by comparing each generation with the one before.</p>
+  </main>
+</body>
+</html>
