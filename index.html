@@ -1,0 +1,110 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Game of Life</title>
+<link rel="stylesheet" href="css/styles.css">
+</head>
+<body>
+  <header class="mx-auto flex w-full max-w-5xl items-center justify-between px-4 py-4">
+    <a href="index.html" class="font-semibold tracking-wide">Conway's Game of Life</a>
+    <nav class="flex gap-1">
+      <a class="nav-link" href="index.html" aria-current="page">Game</a>
+      <a class="nav-link" href="how-it-works.html">How it works</a>
+      <a class="nav-link" href="about.html">About</a>
+    </nav>
+  </header>
+
+  <main class="mx-auto flex w-full max-w-5xl flex-col items-center gap-1.5 px-4 pb-10">
+    <div class="flex gap-3">
+      <div class="panel min-w-36 px-4 py-2"><span class="block text-[0.7rem] uppercase tracking-widest text-muted">Generation</span><b id="gen" class="text-2xl tabular-nums text-accent">0</b></div>
+      <div class="panel min-w-36 px-4 py-2"><span class="block text-[0.7rem] uppercase tracking-widest text-muted">Live cells</span><b id="live" class="text-2xl tabular-nums text-accent">0</b></div>
+    </div>
+
+    <!-- Reserved slot above the board: a message never covers the grid or shifts the layout. -->
+    <div class="flex min-h-[26px] items-center justify-center">
+      <div id="status" role="status" class="max-w-xl rounded-full border border-accent bg-panel px-4 py-0.5 text-center text-sm empty:hidden"></div>
+    </div>
+
+    <div class="flex flex-wrap items-start justify-center gap-5 min-[992px]:flex-nowrap">
+      <div class="flex flex-col items-center gap-3">
+        <canvas id="board" aria-label="Game of Life grid. Click or drag to toggle cells."
+          class="block aspect-square w-[min(92vw,640px)] cursor-crosshair touch-none rounded-md border-4 border-[#4b5578] shadow-[0_8px_28px_rgba(0,0,0,.45)]"></canvas>
+        <ul class="flex flex-wrap justify-center gap-x-5 gap-y-2 text-sm text-muted" aria-label="Cell colors">
+          <li class="flex items-center gap-2"><span class="size-3.5 rounded-sm border border-cell-grid bg-cell-live"></span>Alive</li>
+          <li id="legend-born" class="hidden items-center gap-2"><span id="legend-born-swatch" class="size-3.5 rounded-sm border border-cell-grid"></span>Just born</li>
+          <li id="legend-died" class="hidden items-center gap-2"><span id="legend-died-swatch" class="size-3.5 rounded-sm border border-cell-grid"></span>Just died</li>
+          <li class="flex items-center gap-2"><span class="size-3.5 rounded-sm border border-cell-grid bg-cell-dead"></span>Dead</li>
+        </ul>
+      </div>
+
+      <!-- Same height as the board; opening a section scrolls inside the panel instead of making it taller. -->
+      <div class="panel flex w-[min(92vw,300px)] flex-col gap-4 overflow-y-auto p-4 [&>*]:shrink-0 min-[992px]:h-[640px]">
+        <div class="grid grid-cols-2 gap-2">
+          <button id="toggle" disabled class="col-span-2 cursor-pointer rounded-md border border-go bg-go px-3 py-2 font-semibold text-[#06200f] transition-colors hover:border-white disabled:cursor-wait disabled:opacity-60">Loading Python…</button>
+          <button id="reset" class="btn">Reset</button>
+          <button id="randomize" class="btn">Randomize</button>
+          <button id="clear" class="btn col-span-2">Clear</button>
+        </div>
+
+        <details id="settings" class="group border-t border-edge pt-4" open>
+          <summary class="flex cursor-pointer list-none items-center justify-between text-xs font-semibold uppercase tracking-widest text-muted hover:text-ink [&::-webkit-details-marker]:hidden">Settings<svg class="size-4 shrink-0 text-muted transition-transform group-open:rotate-180" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 8l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="mt-4 flex flex-col gap-4">
+            <label class="flex flex-col gap-1 text-sm">Grid size <small id="size-hint" class="text-xs text-muted"></small>
+              <input id="size" type="number" step="1" class="field">
+            </label>
+
+            <div class="flex flex-col gap-1.5">
+              <label class="flex flex-col gap-1 text-sm">Rule <small class="text-xs text-muted">Birth/Survival, e.g. B3/S23</small>
+                <input id="rule" type="text" spellcheck="false" autocomplete="off" class="field font-mono">
+              </label>
+              <p id="rule-error" role="alert" class="text-xs leading-snug text-danger empty:hidden"></p>
+              <p class="text-xs leading-snug text-muted"><strong class="font-semibold text-ink">B</strong> = neighbor counts that bring a dead cell to life, <strong class="font-semibold text-ink">S</strong> = counts that keep a live cell alive, digits <span id="rules-range">0–8</span>. <a href="how-it-works.html#rules-input" class="underline hover:text-ink">More</a></p>
+            </div>
+
+            <label class="flex flex-col gap-1 text-sm">Stop at generation <small id="maxgen-hint" class="text-xs text-muted"></small>
+              <input id="maxgen" type="number" min="1" step="1" class="field">
+            </label>
+          </div>
+        </details>
+
+        <details id="style" class="group border-t border-edge pt-4">
+          <summary class="flex cursor-pointer list-none items-center justify-between text-xs font-semibold uppercase tracking-widest text-muted hover:text-ink [&::-webkit-details-marker]:hidden">Style<svg class="size-4 shrink-0 text-muted transition-transform group-open:rotate-180" viewBox="0 0 20 20" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M5 8l5 5 5-5" stroke-linecap="round" stroke-linejoin="round"/></svg></summary>
+          <div class="mt-4 flex flex-col gap-4">
+            <label class="flex flex-col gap-1 text-sm">
+              <span class="flex justify-between">Speed <output id="speed-out" class="tabular-nums text-accent">10 gen/s</output></span>
+              <input id="speed" type="range" min="1" max="30" step="1" value="10" class="w-full accent-accent">
+            </label>
+
+            <label class="flex flex-col gap-1 text-sm">
+              <span class="flex justify-between">Roundness <output id="smooth-out" class="tabular-nums text-accent">Off</output></span>
+              <input id="smooth" type="range" min="0" max="100" step="10" value="0" class="w-full accent-accent">
+              <small class="text-xs text-muted">Rounds the cells' corners: off is square, 100% is round.</small>
+            </label>
+
+            <div class="flex flex-col gap-3">
+              <label class="flex cursor-pointer items-center gap-2 text-sm">
+                <input id="highlight" type="checkbox" checked class="size-4 accent-accent">
+                Highlight Just Born / Just Died cells
+              </label>
+              <div id="highlight-colors" class="hidden flex-col gap-2 text-sm">
+                <label class="flex items-center justify-between gap-3">Just born
+                  <input id="born-color" type="color" class="h-8 w-14 cursor-pointer rounded border border-edge bg-field p-0.5">
+                </label>
+                <label class="flex items-center justify-between gap-3">Just died
+                  <input id="died-color" type="color" class="h-8 w-14 cursor-pointer rounded border border-edge bg-field p-0.5">
+                </label>
+                <button id="reset-colors" type="button" class="btn py-1 text-xs">Reset colors</button>
+              </div>
+            </div>
+          </div>
+        </details>
+      </div>
+    </div>
+  </main>
+
+<script src="https://cdn.jsdelivr.net/pyodide/v0.26.4/full/pyodide.js"></script>
+<script type="module" src="js/main.js"></script>
+</body>
+</html>
