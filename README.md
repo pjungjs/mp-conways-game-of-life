@@ -1,7 +1,5 @@
 # Conway's Game of Life
 
-**Live site:** https://mp-conways-game-of-life.netlify.app/
-
 [Conway's Game of Life](https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life) is a zero-player cellular automaton devised by John Horton Conway in 1970. Cells on a grid are alive or dead, and every generation each cell changes by its number of live neighbors:
 
 1. A live cell with fewer than two live neighbors dies (underpopulation).
@@ -12,6 +10,8 @@
 In B/S notation that is `B3/S23`, and this version lets you change it. Draw your own patterns, resize the grid and watch the generations unfold, all in the browser.
 
 ## Demo
+
+**Live site:** https://mp-conways-game-of-life.netlify.app/
 
 ![The game mid-run: just born cells in yellow, just died cells in red](screenshots/game.png)
 
