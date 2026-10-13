@@ -1,4 +1,10 @@
-@import "tailwindcss";
+@import "tailwindcss" source(none);
+
+/* Only scan the files that actually use classes, so words in README/Python never become CSS. */
+@source "../index.html";
+@source "../about.html";
+@source "../how-it-works.html";
+@source "../js/main.js";
 
 /* One place for every color. `static` keeps them all available as CSS variables,
    which js/main.js reads to paint the canvas. */
@@ -13,6 +19,9 @@
   --color-go: #4ade80;
   --color-stop: #ff6b6b;
   --color-danger: #ff8a8a;
+  --color-button-bg: #323a54;    /* button face */
+  --color-board-border: #4b5578; /* border around the canvas */
+  --color-start-text: #06200f;   /* text on the Start/Stop button */
 
   /* the board */
   --color-cell-dead: #07090d;
@@ -30,7 +39,7 @@
 
 @layer components {
   .btn {
-    @apply cursor-pointer rounded-md border border-edge bg-[#323a54] px-3 py-2 text-ink transition-colors hover:border-accent;
+    @apply cursor-pointer rounded-md border border-edge bg-button-bg px-3 py-2 text-ink transition-colors hover:border-accent;
   }
   .field {
     @apply w-full rounded-md border border-edge bg-field px-2.5 py-2 text-ink placeholder:text-muted/60;
@@ -40,6 +49,42 @@
   }
   .panel {
     @apply rounded-xl border border-edge bg-panel;
+  }
+  .site-header {
+    @apply mx-auto flex w-full max-w-5xl items-center justify-between px-4 py-4;
+  }
+  .stat-card {
+    @apply min-w-36 px-4 py-2;
+  }
+  .stat-label {
+    @apply block text-[0.7rem] tracking-widest text-muted uppercase;
+  }
+  .stat-value {
+    @apply text-2xl text-accent tabular-nums;
+  }
+  .section-heading {
+    @apply flex cursor-pointer list-none items-center justify-between text-xs font-semibold tracking-widest text-muted uppercase hover:text-ink;
+  }
+  .section-heading::-webkit-details-marker {
+    display: none;
+  }
+  .section-arrow {
+    @apply size-4 shrink-0 text-muted transition-transform group-open:rotate-180;
+  }
+  .labeled-field {
+    @apply flex flex-col gap-1 text-sm;
+  }
+  .field-hint {
+    @apply text-xs text-muted;
+  }
+  .cell-swatch {
+    @apply size-3.5 rounded-sm border border-cell-grid;
+  }
+  .example-cell {
+    @apply aspect-square border border-cell-grid;
+  }
+  .accent-link {
+    @apply text-accent underline hover:text-ink;
   }
   .nav-link {
     @apply rounded-md px-3 py-1.5 text-sm text-muted transition-colors hover:text-ink aria-[current=page]:bg-panel aria-[current=page]:text-ink;

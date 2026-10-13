@@ -7,7 +7,7 @@
 <link rel="stylesheet" href="css/styles.css">
 </head>
 <body>
-  <header class="mx-auto flex w-full max-w-5xl items-center justify-between px-4 py-4">
+  <header class="site-header">
     <a href="index.html" class="font-semibold tracking-wide">Conway's Game of Life</a>
     <nav class="flex gap-1">
       <a class="nav-link" href="index.html">Game</a>
@@ -29,15 +29,15 @@
     </ol>
     <div class="my-5 grid grid-cols-2 gap-3 sm:grid-cols-4">
       <figure class="panel flex flex-col items-center gap-3 p-4 text-center">
-        <div class="grid w-24 grid-cols-3"><span class="aspect-square bg-cell-live border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-live border border-cell-grid ring-2 ring-inset ring-accent"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span></div>
+        <div class="grid w-24 grid-cols-3"><span class="example-cell bg-cell-live"></span><span class="example-cell bg-cell-dead"></span><span class="example-cell bg-cell-dead"></span><span class="example-cell bg-cell-dead"></span><span class="example-cell bg-cell-live ring-2 ring-inset ring-accent"></span><span class="example-cell bg-cell-dead"></span><span class="example-cell bg-cell-dead"></span><span class="example-cell bg-cell-dead"></span><span class="example-cell bg-cell-dead"></span></div>
         <figcaption class="flex flex-col gap-1.5 text-sm">
           <strong class="text-ink">1. Underpopulation</strong>
           <span class="text-muted">Alive with 1 live neighbor: fewer than two.</span>
-          <span class="flex items-center justify-center gap-2 text-ink"><span class="size-3.5 rounded-sm bg-cell-dead border border-cell-grid"></span>Next generation: dies</span>
+          <span class="flex items-center justify-center gap-2 text-ink"><span class="cell-swatch bg-cell-dead"></span>Next generation: dies</span>
         </figcaption>
       </figure>
       <figure class="panel flex flex-col items-center gap-3 p-4 text-center">
-        <div class="grid w-24 grid-cols-3"><span class="aspect-square bg-cell-live border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-live border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-live border border-cell-grid ring-2 ring-inset ring-accent"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span></div>
+        <div class="grid w-24 grid-cols-3"><span class="example-cell bg-cell-live"></span><span class="example-cell bg-cell-dead"></span><span class="example-cell bg-cell-live"></span><span class="example-cell bg-cell-dead"></span><span class="example-cell bg-cell-live ring-2 ring-inset ring-accent"></span><span class="example-cell bg-cell-dead"></span><span class="example-cell bg-cell-dead"></span><span class="example-cell bg-cell-dead"></span><span class="example-cell bg-cell-dead"></span></div>
         <figcaption class="flex flex-col gap-1.5 text-sm">
           <strong class="text-ink">2. Survival</strong>
           <span class="text-muted">Alive with 2 live neighbors: lives on.</span>
@@ -45,15 +45,15 @@
         </figcaption>
       </figure>
       <figure class="panel flex flex-col items-center gap-3 p-4 text-center">
-        <div class="grid w-24 grid-cols-3"><span class="aspect-square bg-cell-live border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-live border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-live border border-cell-grid ring-2 ring-inset ring-accent"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-live border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-live border border-cell-grid"></span></div>
+        <div class="grid w-24 grid-cols-3"><span class="example-cell bg-cell-live"></span><span class="example-cell bg-cell-dead"></span><span class="example-cell bg-cell-live"></span><span class="example-cell bg-cell-dead"></span><span class="example-cell bg-cell-live ring-2 ring-inset ring-accent"></span><span class="example-cell bg-cell-dead"></span><span class="example-cell bg-cell-live"></span><span class="example-cell bg-cell-dead"></span><span class="example-cell bg-cell-live"></span></div>
         <figcaption class="flex flex-col gap-1.5 text-sm">
           <strong class="text-ink">3. Overpopulation</strong>
           <span class="text-muted">Alive with 4 live neighbors: more than three.</span>
-          <span class="flex items-center justify-center gap-2 text-ink"><span class="size-3.5 rounded-sm bg-cell-dead border border-cell-grid"></span>Next generation: dies</span>
+          <span class="flex items-center justify-center gap-2 text-ink"><span class="cell-swatch bg-cell-dead"></span>Next generation: dies</span>
         </figcaption>
       </figure>
       <figure class="panel flex flex-col items-center gap-3 p-4 text-center">
-        <div class="grid w-24 grid-cols-3"><span class="aspect-square bg-cell-live border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-live border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid ring-2 ring-inset ring-accent"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-live border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span><span class="aspect-square bg-cell-dead border border-cell-grid"></span></div>
+        <div class="grid w-24 grid-cols-3"><span class="example-cell bg-cell-live"></span><span class="example-cell bg-cell-dead"></span><span class="example-cell bg-cell-live"></span><span class="example-cell bg-cell-dead"></span><span class="example-cell bg-cell-dead ring-2 ring-inset ring-accent"></span><span class="example-cell bg-cell-dead"></span><span class="example-cell bg-cell-live"></span><span class="example-cell bg-cell-dead"></span><span class="example-cell bg-cell-dead"></span></div>
         <figcaption class="flex flex-col gap-1.5 text-sm">
           <strong class="text-ink">4. Reproduction</strong>
           <span class="text-muted">Dead with exactly 3 live neighbors.</span>
